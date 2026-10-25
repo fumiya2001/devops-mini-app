@@ -1,0 +1,41 @@
+---
+- name: Configure devops-server
+  hosts: devops-server
+  become: yes
+
+  tasks:
+    - name: Update apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+      
+    - name: Install Docker and Docker Compose
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+      
+    - name: Start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+    
+    - name: Add Ubuntu user to docker group
+      ansible.builtin.user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Clone the repository
+      ansible.builtin.git:
+        repo: 'https://github.com/fumiya2001/devops-mini-app.git'
+        dest: /home/ubuntu/devops-mini-app
+        single_branch: yes
+        version: main
+    
+    - name: Run Docker Compose to start the application
+      ansible.builtin.command:
+        cmd: docker compose up -d --build
+        chdir: /home/ubuntu/devops-mini-app
+      
