@@ -1,18 +1,32 @@
-name: aws-test
+name: Test AWS Connection
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   test-aws:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check AWS Role ARN
+        env:
+          AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+        run: |
+          if [ -z "$AWS_ROLE_ARN" ]; then
+            echo "::error::AWS_ROLE_ARN is empty"
+            exit 1
+          fi
+          echo "AWS_ROLE_ARN is configured"
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
-          role-to-assume: ${{vars.AWS_ROLE_ARN}}
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
-      
+
       - name: Verify AWS identity
         run: aws sts get-caller-identity
