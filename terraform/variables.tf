@@ -1,4 +1,4 @@
-variable "my_ip" {
-    type = string
-    sensitive = true
-}
+#variable "my_ip" {
+#    type = string
+#    sensitive = true
+#}
