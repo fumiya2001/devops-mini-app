@@ -24,10 +24,10 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Install Ansible
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ansible
+#      - name: Install Ansible
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y ansible
 
       - name: Run deployment script
         run: bash deploy.sh

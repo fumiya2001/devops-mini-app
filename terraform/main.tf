@@ -46,10 +46,10 @@ resource "aws_security_group" "web_sg" {
     }
 }
 
-resource "aws_key_pair" "devops_key" {
-    key_name   = "deployer"
-    public_key = file("~/.ssh/aws-service.pub")
-}
+#resource "aws_key_pair" "devops_key" {
+#    key_name   = "deployer"
+#    public_key = file("~/.ssh/aws-service.pub")
+#}
 
 output "instance_public_ip" {
     value = aws_instance.web.public_ip
