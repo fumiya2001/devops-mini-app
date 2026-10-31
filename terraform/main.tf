@@ -17,7 +17,7 @@ resource "aws_instance" "web" {
     instance_type = "t3.micro"
     vpc_security_group_ids = [aws_security_group.web_sg.id]
     
-    key_name = aws_key_pair.devops_key.key_name
+    # key_name = aws_key_pair.devops_key.key_name
 
     tags = {
         Name = "devops-mini-app"
