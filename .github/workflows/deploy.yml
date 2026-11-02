@@ -29,6 +29,12 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/aws-service.pem
           chmod 600 ~/.ssh/aws-service.pem
+      
+      - name: Add EC2 to known hosts
+        env:
+          EC2_HOST: ${{ vars.EC2_HOST }}
+        run: |
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
 
       - name: Install Ansible
         run: |
