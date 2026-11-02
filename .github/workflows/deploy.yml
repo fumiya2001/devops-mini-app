@@ -21,13 +21,19 @@ jobs:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v3
 
-#      - name: Install Ansible
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y ansible
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/aws-service.pem
+          chmod 600 ~/.ssh/aws-service.pem
+          
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
 
       - name: Run deployment script
         run: bash -x deploy.sh
