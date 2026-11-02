@@ -29,11 +29,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/aws-service.pem
           chmod 600 ~/.ssh/aws-service.pem
-          
+
       - name: Install Ansible
         run: |
           sudo apt-get update
           sudo apt-get install -y ansible
 
       - name: Run deployment script
+        env:
+          EC2_HOST: ${{vars.EC2_HOST}}
         run: bash -x deploy.sh
