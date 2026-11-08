@@ -57,10 +57,10 @@ resource "aws_iam_role_policy_attachment" "devops-mini-app-attach" {
 #    domain = "vpc"
 #}
 
-resource "aws_eip_association" "web_eip_assoc" {
-    instance_id   = aws_instance.web.id
-    allocation_id = aws_eip.web_eip.id
-}
+#resource "aws_eip_association" "web_eip_assoc" {
+#    instance_id   = aws_instance.web.id
+#    allocation_id = aws_eip.web_eip.id
+#}
 resource "aws_security_group" "web_sg" {
     name = "web_sg"
     ingress {
