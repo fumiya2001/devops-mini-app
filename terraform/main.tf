@@ -53,9 +53,9 @@ resource "aws_iam_role_policy_attachment" "devops-mini-app-attach" {
     policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_eip" "web_eip"{
-    domain = "vpc"
-}
+#resource "aws_eip" "web_eip"{
+#    domain = "vpc"
+#}
 
 resource "aws_eip_association" "web_eip_assoc" {
     instance_id   = aws_instance.web.id
@@ -83,9 +83,3 @@ resource "aws_security_group" "web_sg" {
     }
 }
 
-
-
-
-output "instance_public_ip" {
-    value = aws_instance.web.public_ip
-}
