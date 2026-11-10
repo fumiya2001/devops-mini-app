@@ -36,12 +36,10 @@ jobs:
 #        run: |
 #          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
 
-#      - name: Install Ansible
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y ansible
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
 
       - name: Run deployment script
-        env:
-          EC2_HOST: ${{vars.EC2_HOST}}
         run: bash -x deploy.sh

@@ -13,6 +13,7 @@
         name:
           - docker.io
           - docker-compose-v2
+          - git
         state: present
       
     - name: Start Docker
