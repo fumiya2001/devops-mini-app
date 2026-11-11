@@ -41,5 +41,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ansible
 
+          pipx inject ansible-core boto3 botocore
+          ansible-galaxy collection install amazon.aws
+
       - name: Run deployment script
         run: bash -x deploy.sh
