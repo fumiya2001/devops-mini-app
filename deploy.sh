@@ -11,4 +11,4 @@ EC2_INSTANCE_ID=$(terraform -chdir=terraform output -raw instance_id)
 
 
 # run ansible
-ansible-playbook -i ansible/inventory.yml ansible/setup.yml --extra-vars "ec2_host=$EC2_INSTANCE_ID"
+ansible-playbook -i ansible/inventory.yml ansible/setup.yml --extra-vars "ec2_instance_id=$EC2_INSTANCE_ID"
