@@ -8,7 +8,7 @@ terraform -chdir=terraform apply -auto-approve -input=false
 
 # get the public IP of the EC2 instance
 EC2_INSTANCE_ID=$(terraform -chdir=terraform output -raw instance_id)
-
+ANSIBLE_SSM_BUCKET=$(terraform -chdir=terraform output -raw ansible_ssm_bucket)
 
 # run ansible
-ansible-playbook -i ansible/inventory.yml ansible/setup.yml --extra-vars "ec2_instance_id=$EC2_INSTANCE_ID"
+ansible-playbook -i ansible/inventory.yml ansible/setup.yml --extra-vars "ec2_instance_id=$EC2_INSTANCE_ID ansible_ssm_bucket=$ANSIBLE_SSM_BUCKET"
